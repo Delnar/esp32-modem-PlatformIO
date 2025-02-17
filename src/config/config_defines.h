@@ -39,3 +39,37 @@ static const uint8_t D10  = 1;
 #define RTS_PIN D7         // RTS Request to Send, connect to host's CTS pin
 #define CTS_PIN D4         // CTS Clear to Send, connect to host's RTS pin
 
+#define VERSIONA 1
+#define VERSIONB 2
+#define VERSION_ADDRESS 0 // EEPROM address
+#define VERSION_LEN 2	  // Length in bytes
+
+#define SSID_ADDRESS 2
+#define SSID_LEN 32
+#define PASS_ADDRESS 34
+#define PASS_LEN 63
+#define BUSY_MSG_ADDRESS 700
+#define BUSY_MSG_LEN 80
+
+#define BAUD_ADDRESS 111
+#define ECHO_ADDRESS 112
+#define SERVER_PORT_ADDRESS 113 // 2 bytes
+#define AUTO_ANSWER_ADDRESS 115 // 1 byte
+#define TELNET_ADDRESS 116		// 1 byte
+#define VERBOSE_ADDRESS 117
+#define PET_TRANSLATE_ADDRESS 118
+#define FLOW_CONTROL_ADDRESS 119
+#define PIN_POLARITY_ADDRESS 120
+
+#define DIAL0_ADDRESS 200
+#define DIAL1_ADDRESS 250
+#define DIAL2_ADDRESS 300
+#define DIAL3_ADDRESS 350
+#define DIAL4_ADDRESS 400
+#define DIAL5_ADDRESS 450
+#define DIAL6_ADDRESS 500
+#define DIAL7_ADDRESS 550
+#define DIAL8_ADDRESS 600
+#define DIAL9_ADDRESS 650
+
+#define LAST_ADDRESS 780

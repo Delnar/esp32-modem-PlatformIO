@@ -1,13 +1,18 @@
 #include <Arduino.h>
-#include <config_defines.h>
-#include <button_helper.h>
-#include <config.h>
-#include <serial_helpers.h>
+#include <config\config_defines.h>
+#include <button_helper\button_helper.h>
+#include <config\config.h>
+#include <serial_helper\serial_helper.h>
+
+
+ButtonHelper::ButtonHelper() {
+}
+
 
 // Hold for 5 seconds to switch to 300 baud
 // Slow flash: keep holding
 // Fast flash: let go
-int checkButton() {
+int ButtonHelper::checkButton() {
 	long time = millis();
 	while (digitalRead(SWITCH_PIN) == LOW && millis() - time < 5000) {
 	  delay(250);
@@ -15,12 +20,9 @@ int checkButton() {
 	  yield();
 	}
 	if (millis() - time > 5000) {
-	  Serial.flush();
-	  Serial.end();
-	  settings.serialspeed = 0;
+	  // Switch to 300 baud
+	  serialHelper.SetBaudRate(0);
 	  delay(100);
-	  Serial.begin(bauds[settings.serialspeed]);
-	  sendResult(R_OK);
 	  while (digitalRead(SWITCH_PIN) == LOW) {
 		delay(50);
 		digitalWrite(LED_PIN, !digitalRead(LED_PIN));
@@ -31,3 +33,5 @@ int checkButton() {
 	  return 0;
 	}
   }
+
+ButtonHelper buttonHelper;

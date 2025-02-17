@@ -1,4 +1,3 @@
-
 // 0 to 16 is yellow
 // 17 to 63 is blue
 #include <Arduino.h>
@@ -10,15 +9,14 @@
 
 #include <WiFiClient.h>
 
-
 #include <Wire.h>
 #include <U8g2lib.h>
 
-#include <config_defines.h>
-#include <config.h>
+#include <config\config_defines.h>
+#include <config\config.h>
 
-#include <serial_helpers.h>
-#include <display_helper.h>
+#include <serial_helper\serial_helper.h>
+#include <display_helper\display_helper.h>
 
 
 String cmd = "";           // Gather a new AT command to this string from serial
@@ -54,8 +52,14 @@ void setup() {
   digitalWrite(RTS_PIN, LOW); // ready to receive data
   pinMode(CTS_PIN, INPUT);
 
-  setup_eeprom();
-  setup_display();
+  settings.SetupEEPROM();
+
+  displayHelper.ShowAllSymbols = true;
+  displayHelper.AddTextElement( 0, 32, DisplayHelper::FONT_6x10, "Baud: %d", serialHelper.GetBaudRate());
+  displayHelper.AddTextElement(10, 48, DisplayHelper::FONT_10x20_MR, "Waiting for");
+  displayHelper.AddTextElement(10, 64, DisplayHelper::FONT_10x20_MR, "Input");
+
+  displayHelper.Draw();
 
   // put your setup code here, to run once:
   // Serial.begin(bauds[settings.serialspeed]);

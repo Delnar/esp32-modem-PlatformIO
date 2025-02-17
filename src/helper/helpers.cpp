@@ -1,10 +1,15 @@
 #include <Arduino.h>
-#include <config.h>
+#include <config\config.h>
+#include <helper\helpers.h>
 
-String connectTimeString()
+Helpers::Helpers()
+{
+}
+
+String Helpers::ConnectTimeString()
 {
 	unsigned long now = millis();
-	int secs = (now - settings.connectTime) / 1000;
+	int secs = (now - settings.ConnectTime) / 1000;
 	int mins = secs / 60;
 	int hours = mins / 60;
 	String out = "";
@@ -22,7 +27,7 @@ String connectTimeString()
 	return out;
 }
 
-void waitForSpace()
+void Helpers::WaitForSpace()
 {
 	Serial.print("PRESS SPACE");
 	char c = 0;
@@ -31,7 +36,7 @@ void waitForSpace()
 		if (Serial.available() > 0)
 		{
 			c = Serial.read();
-			if (settings.petTranslate == true)
+			if (settings.PetTranslate == true)
 			{
 				if (c > 127)
 					c -= 128;
@@ -40,3 +45,6 @@ void waitForSpace()
 	}
 	Serial.print("\r");
 }
+
+
+Helpers helpers;
